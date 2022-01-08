@@ -1,0 +1,34 @@
+:root {
+  --main-color: #4c7588;
+  --error-color: #dc143c70;
+  --error-color-border: #dc143c;
+  --success-color: #2e8b5770;
+  --success-color-border: #2e8b57;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #faf7f5;
+  color: #000000;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  border: 0;
+}
+
+ul {
+  list-style: none;
+}

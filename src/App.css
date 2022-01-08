@@ -1,0 +1,12 @@
+.App {
+  max-width: 90vw;
+  width: 400px;
+  margin: 0 auto;
+  padding-bottom: 20vh;
+}
+
+.App-title {
+  width: 100%;
+  text-align: center;
+  margin: 25px 0;
+}
