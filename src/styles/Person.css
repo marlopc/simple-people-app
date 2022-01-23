@@ -45,7 +45,7 @@
   display: flex;
   align-items: center;
   column-gap: 5px;
-  padding-right: 15px;
+  padding: 7px 15px 7px 10px;
   background: var(--error-color);
   border-radius: 5px;
   font-size: 16px;

@@ -5,6 +5,7 @@ import Edit from '../components/icons/Edit';
 import { usePeopleContext } from '../contexts/PeopleStorage';
 import '../styles/Person.css';
 import defaultUserImage from '../assets/default-user.jpg';
+import ArrowBack from '../components/icons/ArrowBack';
 
 const Person = () => {
   const { get, remove } = usePeopleContext();
@@ -24,6 +25,11 @@ const Person = () => {
 
   return (
     <main>
+      <header className='route-header'>
+        <button className='rounded' onClick={() => navigate('/')}>
+          <ArrowBack />
+        </button>
+      </header>
       {person && (
         <div className='Person'>
           <header className='Person-header'>

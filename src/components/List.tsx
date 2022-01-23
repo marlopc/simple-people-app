@@ -45,6 +45,9 @@ const PersonItem: React.FC<{person: Person}> = ({ person }) => {
             </div>
             <div className='List-item-body-info'>
               <p className='List-item-body-info-age'>Age: {person.age}</p>
+              {person.phone && (
+                <p className='List-item-body-info-phone'>Phone: {person.phone}</p>
+              )}
               {person.note && (
                 <p className='List-item-body-info-note'>"{person.note}"</p>
               )}

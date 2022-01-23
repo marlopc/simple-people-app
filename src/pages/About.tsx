@@ -29,9 +29,23 @@ const About = (): React.ReactElement => {
             Hi!, I'm Lucas, Web Developer from Argentina, my development
             stack is Javascript ( Vanilla, React, Node ), HTML, CSS and more, you
             can see my full profile at my{' '}
-            <a href='https://lucaspanaro.ga/'>website</a> 
+            <a
+              href='https://lucaspanaro.ga/'
+              rel='noopener noreferrer'
+              target='_blank'
+              className='About-me-link'
+            >
+              website
+            </a> 
             {' '}or my{' '}
-            <a href='https://www.linkedin.com/in/lucas-panaro/'>LinkedIn</a>.
+            <a
+              href='https://www.linkedin.com/in/lucas-panaro/'
+              rel='noopener noreferrer'
+              target='_blank'
+              className='About-me-link'
+            >
+              LinkedIn
+            </a>.
             <br/><br/>
             Feel free to send my a message!
           </p>
@@ -81,7 +95,6 @@ const About = (): React.ReactElement => {
           </p>
         </section>
         <section>
-          <h2>Final words</h2>
           <p>
             I hope you liked the app, thanks for visiting it!
           </p>

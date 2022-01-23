@@ -101,6 +101,10 @@
   object-fit: cover;
 }
 
+.List-item-body-info {
+  font-weight: 400;
+}
+
 .List-item-body-info-note {
   padding-top: 10px;
   break-after: always;

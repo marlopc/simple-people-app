@@ -14,6 +14,12 @@
   padding-bottom: 5px;
 }
 
+.About-me-link {
+  font-weight: 600;
+  padding: 0;
+  color: var(--info-color-border);
+}
+
 .About-me-links {
   margin: 25px 0 15px;
   display: flex;
