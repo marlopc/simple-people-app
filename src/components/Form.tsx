@@ -57,7 +57,6 @@ const Form: React.FC<{toEditPerson?: PersonForm['form'], isEdit?: boolean}> = ({
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
-    console.log(e)
     setForm({
       ...form,
       [e.target.name]: e.target.value,

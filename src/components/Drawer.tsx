@@ -21,7 +21,7 @@ const Drawer: React.FC<DrawerProps> = ({ theme, isOpen, close }): React.ReactEle
 
     document.documentElement.addEventListener('click', cb);
 
-    return () => document.documentElement.addEventListener('click', cb);
+    return () => document.documentElement.removeEventListener('click', cb);
   }, [close]);
 
   React.useEffect(() => {
