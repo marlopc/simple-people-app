@@ -1,0 +1,35 @@
+.Switch-track {
+  cursor: pointer;
+  position: relative;
+  background: var(--border-color);
+  width: 42px;
+  height: 22px;
+  border-radius: 15px;
+  box-shadow: inset 0 0 4px #3030303f;
+  transition: background-color 200ms ease;
+}
+
+.Switch-track_active {
+  background: #419653;
+}
+
+.Switch-dot {
+  cursor: pointer;
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  top: 3px;
+  left: 4px;
+  transition: left 200ms ease;
+  box-shadow: 0 0 2px 2px #66666627;
+}
+
+.Switch-dot_active {
+  left: calc(100% - 20px);
+}
+
+.Switch-input {
+  display: none;
+}

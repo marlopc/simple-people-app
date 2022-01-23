@@ -1,0 +1,90 @@
+.Person {
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+}
+
+.Person-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.Person-info-name {
+  padding: 5px 15px;
+}
+
+.Person-info-list {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  row-gap: 10px;
+  flex-grow: 1;
+  font-weight: 400;
+}
+
+.Person-actions {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+.Person-actions-edit {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  padding: 7px 15px 7px 10px;
+  background: var(--info-color);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.Person-actions-remove {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  padding-right: 15px;
+  background: var(--error-color);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.Person-header {
+  background: var(--secondary-color);
+  padding-top: 15px;
+  height: 210px;
+  margin-bottom: 60px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.Person-header-image {
+  margin: 0 auto;
+  width: 60vw;
+  min-width: 180px;
+  min-height: 180px;
+  height: 60vw;
+  max-height: 250px;
+  max-width: 250px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--secondary-color);
+}
+
+.Person-header-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Person-date {
+  padding: 0 12px;
+}
+
+@media (min-width: 860px) {  
+  .Person-header-image {
+    margin: 0 0 0 35px;
+  }
+}

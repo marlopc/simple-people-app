@@ -1,0 +1,30 @@
+.Dropdown-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: none;
+}
+
+.Dropdown-bg_show {
+  display: block;
+}
+
+.Dropdown-list {
+  position: absolute;
+  background: var(--menu-color);
+  height: auto;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 0px var(--shadow-color);
+  z-index: 1;
+}
+
+.Dropdown-list_open {
+  max-height: 100vh;
+}

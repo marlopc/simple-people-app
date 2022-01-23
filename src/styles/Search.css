@@ -1,0 +1,38 @@
+.Search {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 35px;
+  padding: 7px 10px 5px;
+  margin: 20px auto 5px;
+  overflow: hidden;
+}
+
+.Search-icon {
+  padding: 8px 8px 5px;
+}
+
+.Search-input {
+  flex-grow: 1;
+  background: transparent;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.Search-input:focus {
+  outline: 0;
+}
+
+.Search-clear {
+  opacity: 0;
+  transform: translateX(35px);
+  transition: transform 300ms ease, opacity 200ms linear;
+  border-radius: 50%;
+}
+
+.Search-clear_show {
+  transform: translateX(0);
+  opacity: 1;
+}

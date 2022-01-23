@@ -1,0 +1,26 @@
+.Nav-push {
+  height: var(--nav-height);
+  width: 100%;
+}
+
+.Nav {
+  position: fixed;
+  display: flex;
+  padding: 10px 15px;
+  column-gap: 15px;
+  top: 0;
+  width: 100%;
+  background: var(--primary-color);
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  height: var(--nav-height);
+  z-index: 3;
+}
+
+.Nav-title {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  flex-grow: 1;
+  width: 100%;
+}

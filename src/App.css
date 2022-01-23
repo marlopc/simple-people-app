@@ -1,12 +1,20 @@
-.App {
-  max-width: 90vw;
-  width: 400px;
-  margin: 0 auto;
-  padding-bottom: 20vh;
+.App[data-theme='dark'] {
+  --primary-color: #272727;
+  --secondary-color: #7e7e7e;
+  --menu-color: #494949;
+  --active-color: #ffffff;
+  --active-text-color: #000000;
+  --border-color: #a0a0a0;
+  --text-color: #eeeeee;
+  --bg-shadow-color: #d8d8d898;
+  --info-color: #3e89d0;
+  --info-color-border: #287ac7;
+  --error-color: #df2323;
+  --shadow-color: #b5b5b535;
 }
 
-.App-title {
-  width: 100%;
-  text-align: center;
-  margin: 25px 0;
+.App {
+  background: var(--primary-color);
+  color: var(--text-color);
+  min-height: 100vh;
 }

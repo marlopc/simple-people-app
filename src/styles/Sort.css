@@ -1,0 +1,26 @@
+.Sort-button {
+  display: flex;
+  align-items: center;
+  transition: background-color 200ms ease;
+  border-radius: 5px;
+  padding: 8px 0 8px 8px;
+}
+
+.Sort-button > span {
+  margin: 5px;
+}
+
+.Sort-button_active {
+  background: var(--secondary-color);
+}
+
+.Sort-selection {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  width: 100%;
+}
+
+.Sort-selection_active {
+  background: var(--info-color);
+}

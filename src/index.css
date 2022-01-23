@@ -1,34 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap');
+
 :root {
-  --main-color: #4c7588;
-  --error-color: #dc143c70;
+  --primary-color: #eceff0;
+  --secondary-color: #e6eaec;
+  --menu-color: #ebebeb;
+  --border-color: #b4b8b9;
+  --text-color: #161616;
+  --active-color: #2c2c2c;
+  --active-text-color: #d1d1d1;
+  --bg-shadow-color: #00000079;
+  --shadow-color: #0000002e;
+  --error-color: #ff587a;
   --error-color-border: #dc143c;
-  --success-color: #2e8b5770;
-  --success-color-border: #2e8b57;
+  --success-color: #2e8b56;
+  --success-color-border: #6c9e82;
+  --info-color: #76bdff;
+  --info-color-border: #157ddf;
+  --nav-height: 60px;
+  --font: 'Nunito Sans';
 }
 
-body {
+body,
+html {
   margin: 0;
-  font-family: 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  padding: 0;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #faf7f5;
-  color: #000000;
+  background: var(--primary-color);
+}
+
+html {
+  height: max-content;
+}
+
+body,
+input,
+button,
+textarea {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
 }
 
 *,
 *::before,
 *::after {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 200ms ease;
+}
+
+input,
+textarea,
+button {
+  border: 0;
 }
 
 button {
   cursor: pointer;
+  padding: 8px 8px 5px;
+  background-color: transparent;
+  transition: background-color 100ms ease;
+  font-weight: 600;
 }
 
-input {
-  border: 0;
+button,
+input,
+textarea {
+  color: inherit;
+}
+
+label,
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+  background: var(--bg-shadow-color);
+}
+
+.rounded {
+  border-radius: 50%;
+}
+
+.route-header {
+  display: flex;
+  align-items: center;
+  padding-top: 8px;
+  column-gap: 5px;
+}
+
+.route-header button {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  animation: appear 600ms ease forwards;
+}
+
+@keyframes appear {
+  0% {
+    max-width: 0;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    max-width: 45px;
+  }
 }
 
 ul {
   list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: 0;
 }
