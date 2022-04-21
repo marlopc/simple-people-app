@@ -1,5 +1,5 @@
 import Form from "../components/Form";
-import '../styles/Add.css';
+import "../styles/Add.css";
 
 const Add = () => {
   return (

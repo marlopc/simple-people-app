@@ -1,38 +1,40 @@
-import '../styles/Form.css';
-import React from 'react'
-import { Person } from '../App';
-import { usePeopleContext } from '../contexts/PeopleStorage';
-import useForm from '../hooks/useForm';
-import ArrowBack from './icons/ArrowBack';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Person } from "../App";
+import { usePeopleContext } from "../contexts/PeopleStorage";
+import useForm from "../hooks/useForm";
+import "../styles/Form.css";
+import ArrowBack from "./icons/ArrowBack";
 
-export interface PersonForm {
+export type PersonForm = {
   form: {
-    id?: number,
-    name: string,
-    age: string,
-    imageURL: string,
-    phone?: string,
-    note?: string,
+    id?: number;
+    name: string;
+    age: string;
+    imageURL: string;
+    phone?: string;
+    note?: string;
   };
-  fields: 'name' | 'age' | 'imageURL' | 'note' | 'phone';
-}
-
-const initialForm: PersonForm['form'] = {
-  name: '',
-  age: '',
-  imageURL: '',
-  note: '',
-  phone: '',
+  fields: "name" | "age" | "imageURL" | "note" | "phone";
 };
 
-const Form: React.FC<{toEditPerson?: PersonForm['form'], isEdit?: boolean}> = ({
-  toEditPerson,
-  isEdit = false,
-}) => {
+const initialForm: PersonForm["form"] = {
+  name: "",
+  age: "",
+  imageURL: "",
+  note: "",
+  phone: "",
+};
+
+const Form: React.FC<{
+  toEditPerson?: PersonForm["form"];
+  isEdit?: boolean;
+}> = ({ toEditPerson, isEdit = false }) => {
   const [form, setForm] = React.useState(toEditPerson || initialForm);
   const [errors, setErrors] = React.useState(initialForm);
-  const [currentFocus, setCurrentFocus] = React.useState<PersonForm['fields'] | null>(null);
+  const [currentFocus, setCurrentFocus] = React.useState<
+    PersonForm["fields"] | null
+  >(null);
   const validateForm = useForm();
   const people = usePeopleContext();
   const navigate = useNavigate();
@@ -40,14 +42,16 @@ const Form: React.FC<{toEditPerson?: PersonForm['form'], isEdit?: boolean}> = ({
   const generateId = (): number => {
     const id = Math.floor(Math.random() * 100000);
     const isUsedId = people?.storage.some((person: Person) => person.id === id);
-  
+
     return isUsedId ? generateId() : id;
   };
 
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleFocus = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const name = e.target.name;
 
-    setCurrentFocus(name as PersonForm['fields']);
+    setCurrentFocus(name as PersonForm["fields"]);
   };
 
   const handleBlur = () => {
@@ -64,7 +68,7 @@ const Form: React.FC<{toEditPerson?: PersonForm['form'], isEdit?: boolean}> = ({
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if(!/[0-9]/.test(e.key)) {
+    if (!/[0-9]/.test(e.key)) {
       e.preventDefault();
       return;
     }
@@ -75,7 +79,7 @@ const Form: React.FC<{toEditPerson?: PersonForm['form'], isEdit?: boolean}> = ({
 
     const newErrors = validateForm(form, errors);
 
-    if(Object.keys(newErrors).length) {
+    if (Object.keys(newErrors).length) {
       setErrors(newErrors);
       setTimeout(() => setErrors(initialForm), 5000);
       return;
@@ -90,126 +94,116 @@ const Form: React.FC<{toEditPerson?: PersonForm['form'], isEdit?: boolean}> = ({
 
     setForm(initialForm);
 
-    isEdit ? people?.edit(person) : people?.append(person);
-    navigate('/');
+    if (isEdit) {
+      people?.edit(person);
+    } else {
+      people?.append(person);
+    }
+
+    navigate("/");
   };
 
-  const getLabelClassName = (name: PersonForm['fields']): string => {
-    let className = 'Form-label';
+  const getLabelClassName = (name: PersonForm["fields"]): string => {
+    let className = "Form-label";
 
-    if(form[name] !== '') className = className.concat(' Form-label_filled');
-    if(currentFocus === name) className = className.concat(' Form-label_focus');
-    if(errors[name]) className = className.concat(' Form-label_error');
+    if (form[name] !== "") className = className.concat(" Form-label_filled");
+    if (currentFocus === name)
+      className = className.concat(" Form-label_focus");
+    if (errors[name]) className = className.concat(" Form-label_error");
 
     return className;
   };
 
   return (
     <>
-      <header className='route-header'>
-        <button className='rounded' onClick={() => navigate('/')}>
+      <header className="route-header">
+        <button className="rounded" onClick={() => navigate("/")}>
           <ArrowBack />
         </button>
-        <h1>{isEdit ? 'Edit contact' : 'New contact'}</h1>
+        <h1>{isEdit ? "Edit contact" : "New contact"}</h1>
       </header>
-      <form className='Form' onSubmit={handleSubmit}>
-        <label
-          htmlFor='name'
-          className={getLabelClassName('name')}
-        >
+      <form className="Form" onSubmit={handleSubmit}>
+        <label htmlFor="name" className={getLabelClassName("name")}>
           Full name
         </label>
         <input
-          id='name'
-          className={`Form-input ${errors.name ? 'Form-input_error' : ''}`}
-          name='name'
+          id="name"
+          className={`Form-input ${errors.name ? "Form-input_error" : ""}`}
+          name="name"
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          type='text'
+          type="text"
           value={form.name}
         />
-        <p className='Form-input-error'>{errors.name}</p>
-        <label
-          htmlFor='age'
-          className={getLabelClassName('age')}
-        >
+        <p className="Form-input-error">{errors.name}</p>
+        <label htmlFor="age" className={getLabelClassName("age")}>
           Age
         </label>
         <input
-          id='age'
-          className={`Form-input ${errors.age ? 'Form-input_error' : ''}`}
-          name='age'
+          id="age"
+          className={`Form-input ${errors.age ? "Form-input_error" : ""}`}
+          name="age"
           onChange={handleChange}
           onKeyPress={handleKeyPress}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onPaste={(e) => e.preventDefault()}
-          type='number'
-          min='0'
-          max='150'
+          type="number"
+          min="0"
+          max="150"
           value={form.age}
         />
-        <p className='Form-input-error'>{errors.age}</p>
-        <label
-          htmlFor='imageURL'
-          className={getLabelClassName('imageURL')}
-        >
+        <p className="Form-input-error">{errors.age}</p>
+        <label htmlFor="imageURL" className={getLabelClassName("imageURL")}>
           Image URL
         </label>
         <input
-          id='imageURL'
-          className={`Form-input ${errors.imageURL ? 'Form-input_error' : ''}`}
-          name='imageURL'
+          id="imageURL"
+          className={`Form-input ${errors.imageURL ? "Form-input_error" : ""}`}
+          name="imageURL"
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          type='text'
+          type="text"
           value={form.imageURL}
         />
-        <p className='Form-input-error'>{errors.imageURL}</p>
-        <label
-          htmlFor='phone'
-          className={getLabelClassName('phone')}
-        >
+        <p className="Form-input-error">{errors.imageURL}</p>
+        <label htmlFor="phone" className={getLabelClassName("phone")}>
           Phone number
         </label>
         <input
-          id='phone'
-          className={`Form-input ${errors.phone ? 'Form-input_error' : ''}`}
-          name='phone'
+          id="phone"
+          className={`Form-input ${errors.phone ? "Form-input_error" : ""}`}
+          name="phone"
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          type='tel'
+          type="tel"
           value={form.phone}
         />
-        <p className='Form-input-error'>{errors.phone}</p>
-        <label
-          htmlFor='note'
-          className={getLabelClassName('note')}
-        >
+        <p className="Form-input-error">{errors.phone}</p>
+        <label htmlFor="note" className={getLabelClassName("note")}>
           Note
         </label>
         <textarea
-          id='note'
-          className={`Form-textarea ${errors.note ? 'Form-textarea_error' : ''}`}
+          id="note"
+          className={`Form-textarea ${
+            errors.note ? "Form-textarea_error" : ""
+          }`}
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          name='note'
+          name="note"
           value={form.note}
         />
-        <p className='Form-input-error'>{errors.note}</p>
-        <button
-          className='Form-submit'
-          type='submit'
-        >
-          {isEdit ? 'Edit' : 'Add to list'}
+        <p className="Form-input-error">{errors.note}</p>
+        <button className="Form-submit" type="submit">
+          {isEdit ? "Edit" : "Add to list"}
         </button>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;

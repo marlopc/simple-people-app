@@ -1,107 +1,116 @@
 import React from "react";
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+import useClickOutside from "../hooks/useClickOutside";
 import { Theme } from "../hooks/useDarkMode";
-import { MenuControls } from "../hooks/useMenu";
-import '../styles/Drawer.css';
+import { DrawerControls } from "../hooks/useDrawer";
+import "../styles/Drawer.css";
 import Close from "./icons/Close";
 import People from "./icons/People";
 import Switch from "./Switch";
 
-interface DrawerProps {
+type DrawerProps = {
   theme: Theme;
-  isOpen: MenuControls['isOpen'];
-  close: MenuControls['closeMenu'];
-}
+  closeDrawer: DrawerControls["close"];
+  isOpen: DrawerControls["isOpen"];
+  closeButtonRef: React.RefObject<HTMLButtonElement>;
+};
 
-const Drawer: React.FC<DrawerProps> = ({ theme, isOpen, close }): React.ReactElement => {
-  const { pathname } = useLocation();
-  
-  React.useEffect(() => {
-    const cb = () => close();
+const Drawer: React.FC<DrawerProps> = ({
+  theme,
+  isOpen,
+  closeDrawer,
+  closeButtonRef,
+}): React.ReactElement => {
+  const drawerRef = React.useRef<HTMLElement>(null);
 
-    document.documentElement.addEventListener('click', cb);
-
-    return () => document.documentElement.removeEventListener('click', cb);
-  }, [close]);
-
-  React.useEffect(() => {
-    close();
-  }, [pathname, close])
+  useClickOutside(drawerRef, () => isOpen && closeDrawer(false));
 
   return (
     <>
-      <div className={`Drawer-bg ${isOpen ? 'Drawer-bg_show' : ''}`}/>
+      <div className={`Drawer-bg ${isOpen ? "Drawer-bg_show" : ""}`} />
       <nav
-        className={`Drawer ${isOpen ? 'Drawer_open' : ''}`}
-        onClick={(e) => e.stopPropagation()}
+        className={`Drawer ${isOpen ? "Drawer_open" : ""}`}
         aria-hidden={!isOpen}
+        style={{ visibility: isOpen ? "visible" : "hidden" }}
+        ref={drawerRef}
       >
-        <header className='Drawer-header'>
-          <span className='Drawer-header-title'>
-            <h3>People</h3><People />
+        <header className="Drawer-header">
+          <span className="Drawer-header-title">
+            <h3>People</h3>
+            <People />
           </span>
-          <button onClick={close} className='rounded'>
+          <button
+            onClick={() => closeDrawer()}
+            className="rounded"
+            ref={closeButtonRef}
+          >
             <Close />
           </button>
         </header>
-        <ul className='LinkList'>
-          <li className='LinkList-item'>
+        <ul className="LinkList">
+          <li className="LinkList-item">
             <NavLink
-              to='/'
-              className={({ isActive }) => `Link ${isActive ? 'Link_active' : ''}`}
+              to="/"
+              className={({ isActive }) =>
+                `Link ${isActive ? "Link_active" : ""}`
+              }
             >
               People
             </NavLink>
           </li>
-          <li className='LinkList-item'>
+          <li className="LinkList-item">
             <NavLink
-              to='/add'
-              className={({ isActive }) => `Link ${isActive ? 'Link_active' : ''}`}
+              to="/add"
+              className={({ isActive }) =>
+                `Link ${isActive ? "Link_active" : ""}`
+              }
             >
               Add contact
             </NavLink>
           </li>
-          <li className='LinkList-item'>
+          <li className="LinkList-item">
             <NavLink
-              to='/about'
-              className={({ isActive }) => `Link ${isActive ? 'Link_active' : ''}`}
+              to="/about"
+              className={({ isActive }) =>
+                `Link ${isActive ? "Link_active" : ""}`
+              }
             >
               About
             </NavLink>
           </li>
         </ul>
-        <footer className='Drawer-footer'>
-          <div className='Drawer-footer-darkmode'>
+        <footer className="Drawer-footer">
+          <div className="Drawer-footer-darkmode">
             Dark mode
             <Switch
-              checked={theme.current === 'dark'}
+              checked={theme.current === "dark"}
               setChecked={theme.toggleTheme}
             />
           </div>
-          <ul className='Drawer-footer-links'>
+          <ul className="Drawer-footer-links">
             <li>
               <a
-                href='https://www.github.com/marlopc'
-                rel='noopener noreferrer'
-                target='_blank'
+                href="https://www.github.com/marlopc"
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 Github
               </a>
             </li>
             <li>
               <a
-                href='https://www.linkedin.com/in/lucas-panaro/'
-                rel='noopener noreferrer'
-                target='_blank'
+                href="https://www.linkedin.com/in/lucas-panaro/"
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 LinkedIn
               </a>
             </li>
             <li>
               <a
-                href='https://lucaspanaro.ga/'
-                rel='noopener noreferrer'
-                target='_blank'
+                href="https://lucaspanaro.ga/"
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 Website
               </a>

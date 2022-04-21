@@ -73,7 +73,7 @@
 
 .Link_active {
   background-color: var(--active-color);
-  color: var(--active-text-color)
+  color: var(--active-text-color);
 }
 
 .Drawer-footer {

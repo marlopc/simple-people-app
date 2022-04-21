@@ -7,14 +7,17 @@ interface TextFieldControls {
 }
 
 const useTextField = (initialValue?: string): TextFieldControls => {
-  const [value, setValue] = React.useState<string>(initialValue || '');
+  const [value, setValue] = React.useState<string>(initialValue || "");
 
-  const set = React.useCallback((e: React.ChangeEvent<HTMLInputElement>): void => {
-    setValue(e.target.value);
-  }, []);
+  const set = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>): void => {
+      setValue(e.target.value);
+    },
+    []
+  );
 
   const clear = React.useCallback((): void => {
-    setValue('');
+    setValue("");
   }, []);
 
   return {

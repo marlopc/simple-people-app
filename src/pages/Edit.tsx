@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import Form from "../components/Form";
 import { usePeopleContext } from "../contexts/PeopleStorage";
-import '../styles/Edit.css';
+import "../styles/Edit.css";
 
 const Edit = () => {
   const { get } = usePeopleContext();
@@ -9,7 +9,7 @@ const Edit = () => {
 
   const person = get(Number(id));
 
-  if(!person) return null;
+  if (!person) return null;
 
   const { timestamp, ...editable } = person;
 
@@ -17,7 +17,11 @@ const Edit = () => {
     <main>
       {person && (
         <Form
-          toEditPerson={{...editable, age: person.age.toString(), imageURL: person.imageURL || ''}}
+          toEditPerson={{
+            ...editable,
+            age: person.age.toString(),
+            imageURL: person.imageURL || "",
+          }}
           isEdit
         />
       )}

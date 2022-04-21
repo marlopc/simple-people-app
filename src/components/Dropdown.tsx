@@ -1,84 +1,88 @@
-import React from 'react';
-import '../styles/Dropdown.css';
+import React from "react";
+import useClickOutside from "../hooks/useClickOutside";
+import "../styles/Dropdown.css";
 
-interface DropdownItemProps {
-  children: React.ReactNode;
-}
-
-const DropdownItem: React.FC<DropdownItemProps> = ({ children }): React.ReactElement => {
-  return (
-    <li className='Dropdown-item'>
-      {children}
-    </li>
-  )
-};
-
-interface DropdownProps {
-  children: React.ReactNode;
+type DropdownProps = {
   initiatorRef: React.RefObject<HTMLElement>;
   isOpen: boolean;
   closeMenu: () => void;
-  from?: 'left' | 'right';
-}
+  from?: "left" | "right";
+};
+
+const DropdownItem: React.FC = ({ children }) => {
+  return <li className="Dropdown-item">{children}</li>;
+};
 
 const Dropdown: React.FC<DropdownProps> = ({
   children,
   initiatorRef,
   isOpen,
   closeMenu,
-  from = 'left'
-}): React.ReactElement => {
+  from = "left",
+}) => {
   const menuRef = React.useRef<HTMLUListElement>(null);
-  
-  const setPosition = React.useCallback((initiator: HTMLElement | null, menu: HTMLElement | null) => {
-    if(!initiator || !menu) return;
 
-    const left = initiator.offsetLeft;
-    const width = initiator.offsetWidth;
-    const top = initiator.offsetTop;
-    const height = initiator.offsetHeight;
+  useClickOutside(menuRef, () => isOpen && closeMenu());
 
-    let right = window.innerWidth - (left + width);
-    if(right < 0) right = 0;
-    
-    menu.style.top = `${top + height}px`;
-    
-    from === 'left'
-      ? menu.style.left = `${left}px`
-      : menu.style.right = `${right}px`;
-  }, [from]);
+  const setPosition = React.useCallback(() => {
+    if (!initiatorRef.current || !menuRef.current) return;
 
-  React.useEffect(() => {
-    if(!initiatorRef.current || !menuRef.current) return;
+    const { left, width, top, height } =
+      initiatorRef.current.getBoundingClientRect();
 
-    setPosition(initiatorRef.current, menuRef.current);
-  }, [initiatorRef, menuRef, from, setPosition]);
+    let right = document.body.clientWidth - (left + width);
+    if (right < 0) right = 0;
 
-  React.useEffect(() => {
-    const cb = () => setPosition(initiatorRef.current, menuRef.current);
+    menuRef.current.style.top = `${top + height}px`;
 
-    window.addEventListener('resize', cb);
+    if (from === "left") {
+      menuRef.current.style.left = `${left}px`;
+    } else {
+      menuRef.current.style.right = `${right}px`;
+    }
+  }, [from, menuRef, initiatorRef]);
 
-    return () => window.removeEventListener('resize', cb);
-  }, [setPosition, initiatorRef, menuRef])
+  const handleKeyDown = React.useCallback(
+    (e: KeyboardEvent) => {
+      if (e.code === "Escape") {
+        closeMenu();
+        e.preventDefault();
+      }
+    },
+    [closeMenu]
+  );
 
   React.useEffect(() => {
-    const cb = () => closeMenu();
+    setPosition();
+  }, [setPosition]);
 
-    isOpen
-      ? document.documentElement.addEventListener('click', cb)
-      : document.documentElement.removeEventListener('click', cb);
+  React.useEffect(() => {
+    const cb = () => setPosition();
 
-    return () => document.removeEventListener('click', cb);
-  }, [isOpen, closeMenu])
+    window.addEventListener("resize", cb);
+
+    return () => window.removeEventListener("resize", cb);
+  }, [setPosition, initiatorRef, menuRef]);
+
+  React.useEffect(() => {
+    if (isOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      window.removeEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, handleKeyDown]);
 
   return (
     <>
-      <div className={`Dropdown-bg ${isOpen ? 'Dropdown-bg_show' : ''}`} />
+      <div className={`Dropdown-bg ${isOpen ? "Dropdown-bg_show" : ""}`} />
       <ul
         ref={menuRef}
-        className={`Dropdown-list ${isOpen ? 'Dropdown-list_open' : ''}`}
-        onClick={(e) => e.stopPropagation()}
+        className={`Dropdown-list ${isOpen ? "Dropdown-list_open" : ""}`}
+        style={{ visibility: isOpen ? "visible" : "hidden" }}
       >
         {children}
       </ul>

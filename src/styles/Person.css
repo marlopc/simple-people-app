@@ -12,6 +12,7 @@
 
 .Person-info-name {
   padding: 5px 15px;
+  font-size: 20px;
 }
 
 .Person-info-list {
@@ -54,7 +55,7 @@
 .Person-header {
   background: var(--secondary-color);
   padding-top: 15px;
-  height: 210px;
+  height: 180px;
   margin-bottom: 60px;
   border-bottom: 1px solid var(--border-color);
 }
@@ -65,8 +66,8 @@
   min-width: 180px;
   min-height: 180px;
   height: 60vw;
-  max-height: 250px;
-  max-width: 250px;
+  max-height: 200px;
+  max-width: 200px;
   overflow: hidden;
   border-radius: 50%;
   border: 1px solid var(--border-color);
@@ -83,7 +84,7 @@
   padding: 0 12px;
 }
 
-@media (min-width: 860px) {  
+@media (min-width: 860px) {
   .Person-header-image {
     margin: 0 0 0 35px;
   }

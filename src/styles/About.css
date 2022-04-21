@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 15px;
-  padding: 15px 12px;
+  padding: 0 12px 15px;
 }
 
 .About p {
@@ -12,6 +12,7 @@
 
 .About h2 {
   padding-bottom: 5px;
+  font-size: 18px;
 }
 
 .About-me-link {
